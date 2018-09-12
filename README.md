@@ -4,6 +4,12 @@ Relógio Despertador Digital feito com uso de AHDL.
 # Organização
 // wip
 
+# Versão Atual:
+0.0.0 (ainda na fase de estudo do problema)
+
+# Changelog
+// wip
+
 # Roadmap
 - 0.1.x: Módulos básicos
 - 0.2.x: Módulos auxiliares
