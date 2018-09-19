@@ -1,0 +1,17 @@
+TITLE "Modulo de controle das entradas";
+
+SUBDESIGN (
+  view_sw[1..0]  : INPUT; 
+  mode_sw        : INPUT; 
+  alarm_sw[1..0] : INPUT;
+  
+  
+  
+)
+
+BEGIN 
+  TABLE
+  END TABLE;
+
+
+END;

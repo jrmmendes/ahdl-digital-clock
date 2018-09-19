@@ -1,0 +1,10 @@
+TITLE "Modulo de controle do horario"
+
+SUBDESIGN horary (
+  
+
+)
+
+BEGIN
+
+END;
