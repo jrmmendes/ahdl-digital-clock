@@ -1,0 +1,9 @@
+.
+├── arquitetura.txt
+├── aux
+├── base
+├── especific
+├── LICENSE
+└── README.md
+
+3 directories, 3 files
