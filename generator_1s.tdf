@@ -1,0 +1,36 @@
+TITLE "Divisor de Clock";
+
+SUBDESIGN generator_1s
+(
+	clock_in: INPUT;
+	clock_out: OUTPUT;
+	
+)
+
+VARIABLE
+	count[24..0]: DFF;
+	aux: TFF;
+	
+
+BEGIN
+
+	count[].clk = clock_in;
+	aux.clk = clock_in;
+	clock_out = aux.q;
+
+	
+	IF count[].q < 25000000 THEN
+	
+		count[].d = count[].q + 1;
+		aux.t = GND;
+	
+	ELSE
+	
+		count[].d = 0;
+		aux.t = VCC;
+		
+	END IF;
+		
+
+END;
+
