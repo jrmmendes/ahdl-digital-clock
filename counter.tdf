@@ -1,0 +1,14 @@
+TITLE "Contador em formato hh:mm:ss"
+
+SUBDESIGN counter
+(
+  clock: INPUT;  %clock de entrada em segundos%
+  EOC: OUTPUT;   %indica o fim da contagem%
+  
+)
+
+
+BEGIN
+
+
+END;

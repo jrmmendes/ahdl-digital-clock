@@ -1,0 +1,10 @@
+TITLE "Modulo de controle do Display/LEDs"
+
+SUBDESIGN display (
+
+)
+
+BEGIN 
+
+
+END;

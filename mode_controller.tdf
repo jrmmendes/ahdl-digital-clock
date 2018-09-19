@@ -1,0 +1,12 @@
+TITLE "Modulo de controle das entradas"
+
+SUBDESIGN (
+  
+)
+
+BEGIN 
+  TABLE
+  END TABLE;
+
+
+END;
