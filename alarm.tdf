@@ -1,9 +1,9 @@
-TITLE "Modulo de controle do alarme"
+TITLE "Modulo de controle do alarme";
 
 SUBDESIGN alarm (
 
 )
 
 BEGIN
-
+  
 END;

@@ -1,10 +1,6 @@
-TITLE "Modulo de controle do cronometro"
+TITLE "Modulo de controle do cronometro";
 
 SUBDESIGN cronometer (
 
 
 )
-
-BEGIN 
-
-END;

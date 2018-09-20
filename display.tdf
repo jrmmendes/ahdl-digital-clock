@@ -2,35 +2,28 @@ TITLE "Modulo de controle do Display/LEDs";
 
 SUBDESIGN display (
   
-  % dados de saida do primeiro alarme %
-  alarm1_hd[3..0], alarm1_hu[3..0], 
-  alarm1_md[3..0], alarm1_mu[3..0], 
-  alarm1_sd[3..0], alarm1_su[3..0], 
+  view_sel[1..0],
+  alarm1_bcd[21..0],
+  alarm2_bcd[21..0],
+  horary_bcd[21..0],
+  cronometer_bcd[21..0]
   : INPUT;
   
-  % dados de saida do segundo alarme %
-  alarm2_hd[3..0], alarm2_hu[3..0], 
-  alarm2_md[3..0], alarm2_mu[3..0], 
-  alarm2_sd[3..0], alarm2_su[3..0], 
-  : INPUT;
   
-  % dados de saida do cronometro %
-  cronometer_hd[3..0], cronometer_hu[3..0], 
-  cronometer_md[3..0], cronometer_mu[3..0], 
-  cronometer_sd[3..0], cronometer_su[3..0], 
-  : INPUT;
+  hour_d[6..0], hour_u[6..0],
+  min_d[6..0], min_u[6..0],
+  sec_d[6..0], sec_u[6..0],
+  dsec_d[6..0], dsec_u[6..0]
+  : OUTPUT;
   
-  % dados de saida do horario %
-  horary_hd[3..0], horary_hu[3..0], 
-  horary_md[3..0], horary_mu[3..0], 
-  horary_sd[3..0], horary_su[3..0], 
-  : INPUT;  
-
-  % controle do que esta sendo exibido %
-  view_sw[1..0] : INPUT;
 )
 
-BEGIN 
-  
+CONSTANT SEL_ALARM1 = B"00";
+CONSTANT SEL_ALARM2 = B"01";
+CONSTANT SEL_HORARY = B"10";
+CONSTANT SEL_CRONOM = B"11";
+
+
+BEGIN
 
 END;
