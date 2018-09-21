@@ -1,0 +1,47 @@
+TITLE "Rising Edge";
+
+SUBDESIGN rising_edge
+(
+	clock, signal : INPUT; % A entrada "signal" consiste na informação analisada %
+	upsignal      : OUTPUT; % Indica se houve subida de borda %
+)
+
+VARIABLE
+
+	ss: MACHINE WITH STATES (s0, s1, s2); % s0 => Estado de operação padrão/s1 => Borda detectada %
+	 
+BEGIN
+	
+	ss.clk   = clock;
+	%ss.reset = reset;%  % Testar se é necessária a criação de uma variável reset (Padrão Altera) %
+	
+	CASE ss IS
+		WHEN s0 =>
+			upsignal = GND;
+			
+			IF signal == VCC THEN
+					ss = s1;
+			ELSE
+					ss = s0;
+			END IF;
+					
+		WHEN s1 =>
+			upsignal = VCC;
+			
+			IF signal == VCC THEN
+					ss = s2;
+			ELSE
+					ss = s0;
+			END IF;
+		WHEN s2 =>
+			upsignal = GND;
+			
+			IF signal == VCC THEN
+					ss = s2;
+			ELSE
+					ss = s0;
+			END IF;
+			
+	END CASE;
+	
+END;
