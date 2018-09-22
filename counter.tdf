@@ -6,7 +6,8 @@ FUNCTION rising_edge (clock, signal)
 
 SUBDESIGN counter
 (
-  clock, system_clock, updown, max[5..0] : INPUT;  %clock de entrada em segundos, pino de subida ou descida, modulo da contagem%
+  clock, system_clock, max[5..0] : INPUT;  %clock de entrada em segundos, pino de subida ou descida, modulo da contagem%
+  updown : INPUT;
   EOC, counter[5..0]: OUTPUT;   %indica o fim da contagem, numero da contagem%
   
 )

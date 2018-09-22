@@ -1,5 +1,5 @@
 Analysis & Synthesis report for digital_clock
-Fri Sep 21 11:43:31 2018
+Fri Sep 21 23:51:56 2018
 Quartus Prime Version 18.0.0 Build 614 04/24/2018 SJ Lite Edition
 
 
@@ -13,13 +13,18 @@ Quartus Prime Version 18.0.0 Build 614 04/24/2018 SJ Lite Edition
   5. Analysis & Synthesis Source Files Read
   6. Analysis & Synthesis Resource Usage Summary
   7. Analysis & Synthesis Resource Utilization by Entity
-  8. State Machine - |counter_test|counter:inst|rising_edge:$00002|ss
-  9. State Machine - |counter_test|counter:inst|rising_edge:$00000|ss
- 10. Registers Removed During Synthesis
- 11. General Register Statistics
- 12. Post-Synthesis Netlist Statistics for Top Partition
- 13. Elapsed Time Per Partition
- 14. Analysis & Synthesis Messages
+  8. State Machine - |relogio|counter:hour|rising_edge:$00002|ss
+  9. State Machine - |relogio|counter:hour|rising_edge:$00000|ss
+ 10. State Machine - |relogio|counter:min|rising_edge:$00002|ss
+ 11. State Machine - |relogio|counter:min|rising_edge:$00000|ss
+ 12. State Machine - |relogio|counter:seg|rising_edge:$00002|ss
+ 13. State Machine - |relogio|counter:seg|rising_edge:$00000|ss
+ 14. Registers Removed During Synthesis
+ 15. Removed Registers Triggering Further Register Optimizations
+ 16. General Register Statistics
+ 17. Post-Synthesis Netlist Statistics for Top Partition
+ 18. Elapsed Time Per Partition
+ 19. Analysis & Synthesis Messages
 
 
 
@@ -45,16 +50,16 @@ refer to the applicable agreement for further details.
 +----------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                     ;
 +------------------------------------+---------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Fri Sep 21 11:43:31 2018       ;
+; Analysis & Synthesis Status        ; Successful - Fri Sep 21 23:51:55 2018       ;
 ; Quartus Prime Version              ; 18.0.0 Build 614 04/24/2018 SJ Lite Edition ;
 ; Revision Name                      ; digital_clock                               ;
-; Top-level Entity Name              ; counter_test                                ;
+; Top-level Entity Name              ; relogio                                     ;
 ; Family                             ; Cyclone IV E                                ;
-; Total logic elements               ; 43                                          ;
-;     Total combinational functions  ; 41                                          ;
-;     Dedicated logic registers      ; 12                                          ;
-; Total registers                    ; 12                                          ;
-; Total pins                         ; 16                                          ;
+; Total logic elements               ; 0                                           ;
+;     Total combinational functions  ; 0                                           ;
+;     Dedicated logic registers      ; 0                                           ;
+; Total registers                    ; 0                                           ;
+; Total pins                         ; 6                                           ;
 ; Total virtual pins                 ; 0                                           ;
 ; Total memory bits                  ; 0                                           ;
 ; Embedded Multiplier 9-bit elements ; 0                                           ;
@@ -68,7 +73,7 @@ refer to the applicable agreement for further details.
 ; Option                                                           ; Setting            ; Default Value      ;
 +------------------------------------------------------------------+--------------------+--------------------+
 ; Device                                                           ; EP4CE115F29C7      ;                    ;
-; Top-level entity name                                            ; counter_test       ; digital_clock      ;
+; Top-level entity name                                            ; relogio            ; digital_clock      ;
 ; Family name                                                      ; Cyclone IV E       ; Cyclone V          ;
 ; Use smart compilation                                            ; Off                ; Off                ;
 ; Enable parallel Assembler and Timing Analyzer during compilation ; On                 ; On                 ;
@@ -157,23 +162,25 @@ refer to the applicable agreement for further details.
 ; Maximum allowed            ; 2           ;
 ;                            ;             ;
 ; Average used               ; 1.00        ;
-; Maximum used               ; 2           ;
+; Maximum used               ; 1           ;
 ;                            ;             ;
 ; Usage by Processor         ; % Time Used ;
 ;     Processor 1            ; 100.0%      ;
-;     Processor 2            ;   0.0%      ;
 +----------------------------+-------------+
 
 
-+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Source Files Read                                                                                                                                                                      ;
-+-----------------------------------+-----------------+------------------------------------+--------------------------------------------------------------------------------------------------------+---------+
-; File Name with User-Entered Path  ; Used in Netlist ; File Type                          ; File Name with Absolute Path                                                                           ; Library ;
-+-----------------------------------+-----------------+------------------------------------+--------------------------------------------------------------------------------------------------------+---------+
-; modules/auxiliary/Rising_Edge.tdf ; yes             ; User AHDL File                     ; C:/Users/Duda/Documents/GitHub/[Eletronica Digital]/digital_clock_v2/modules/auxiliary/Rising_Edge.tdf ;         ;
-; counter.tdf                       ; yes             ; User AHDL File                     ; C:/Users/Duda/Documents/GitHub/[Eletronica Digital]/digital_clock_v2/counter.tdf                       ;         ;
-; counter_test.bdf                  ; yes             ; User Block Diagram/Schematic File  ; C:/Users/Duda/Documents/GitHub/[Eletronica Digital]/digital_clock_v2/counter_test.bdf                  ;         ;
-+-----------------------------------+-----------------+------------------------------------+--------------------------------------------------------------------------------------------------------+---------+
++-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Source Files Read                                                                                                                                        ;
++-----------------------------------+-----------------+------------------------+--------------------------------------------------------------------------------------+---------+
+; File Name with User-Entered Path  ; Used in Netlist ; File Type              ; File Name with Absolute Path                                                         ; Library ;
++-----------------------------------+-----------------+------------------------+--------------------------------------------------------------------------------------+---------+
+; modules/auxiliary/Rising_Edge.tdf ; yes             ; User AHDL File         ; /home/breno/Breno Pedro/Faculdade/digital_clock_v2/modules/auxiliary/Rising_Edge.tdf ;         ;
+; counter.tdf                       ; yes             ; User AHDL File         ; /home/breno/Breno Pedro/Faculdade/digital_clock_v2/counter.tdf                       ;         ;
+; generator_1s.tdf                  ; yes             ; User AHDL File         ; /home/breno/Breno Pedro/Faculdade/digital_clock_v2/generator_1s.tdf                  ;         ;
+; relogio.tdf                       ; yes             ; User AHDL File         ; /home/breno/Breno Pedro/Faculdade/digital_clock_v2/relogio.tdf                       ;         ;
+; counter.inc                       ; yes             ; User Unspecified File  ; /home/breno/Breno Pedro/Faculdade/digital_clock_v2/counter.inc                       ;         ;
+; generator_1s.inc                  ; yes             ; User Unspecified File  ; /home/breno/Breno Pedro/Faculdade/digital_clock_v2/generator_1s.inc                  ;         ;
++-----------------------------------+-----------------+------------------------+--------------------------------------------------------------------------------------+---------+
 
 
 +------------------------------------------------------------+
@@ -181,79 +188,178 @@ refer to the applicable agreement for further details.
 +---------------------------------------------+--------------+
 ; Resource                                    ; Usage        ;
 +---------------------------------------------+--------------+
-; Estimated Total logic elements              ; 43           ;
 ;                                             ;              ;
-; Total combinational functions               ; 41           ;
+; Total combinational functions               ; 0            ;
 ; Logic element usage by number of LUT inputs ;              ;
-;     -- 4 input functions                    ; 18           ;
-;     -- 3 input functions                    ; 8            ;
-;     -- <=2 input functions                  ; 15           ;
+;     -- 4 input functions                    ; 0            ;
+;     -- 3 input functions                    ; 0            ;
+;     -- <=2 input functions                  ; 0            ;
 ;                                             ;              ;
 ; Logic elements by mode                      ;              ;
-;     -- normal mode                          ; 27           ;
-;     -- arithmetic mode                      ; 14           ;
+;     -- normal mode                          ; 0            ;
+;     -- arithmetic mode                      ; 0            ;
 ;                                             ;              ;
-; Total registers                             ; 12           ;
-;     -- Dedicated logic registers            ; 12           ;
+; Total registers                             ; 0            ;
+;     -- Dedicated logic registers            ; 0            ;
 ;     -- I/O registers                        ; 0            ;
 ;                                             ;              ;
-; I/O pins                                    ; 16           ;
+; I/O pins                                    ; 6            ;
 ;                                             ;              ;
 ; Embedded Multiplier 9-bit elements          ; 0            ;
 ;                                             ;              ;
-; Maximum fan-out node                        ; updown~input ;
-; Maximum fan-out                             ; 9            ;
-; Total fan-out                               ; 171          ;
-; Average fan-out                             ; 2.01         ;
+; Maximum fan-out node                        ; system_clock ;
+; Maximum fan-out                             ; 1            ;
+; Total fan-out                               ; 6            ;
+; Average fan-out                             ; 0.50         ;
 +---------------------------------------------+--------------+
 
 
-+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                                                                 ;
-+----------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+-----------------------------------------------+--------------+--------------+
-; Compilation Hierarchy Node ; Combinational ALUTs ; Dedicated Logic Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name                           ; Entity Name  ; Library Name ;
-+----------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+-----------------------------------------------+--------------+--------------+
-; |counter_test              ; 41 (0)              ; 12 (0)                    ; 0           ; 0            ; 0       ; 0         ; 16   ; 0            ; |counter_test                                 ; counter_test ; work         ;
-;    |counter:inst|          ; 41 (39)             ; 12 (8)                    ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |counter_test|counter:inst                    ; counter      ; work         ;
-;       |rising_edge:$00000| ; 1 (1)               ; 2 (2)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |counter_test|counter:inst|rising_edge:$00000 ; rising_edge  ; work         ;
-;       |rising_edge:$00002| ; 1 (1)               ; 2 (2)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |counter_test|counter:inst|rising_edge:$00002 ; rising_edge  ; work         ;
-+----------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+-----------------------------------------------+--------------+--------------+
++----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                                      ;
++----------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+---------------------+-------------+--------------+
+; Compilation Hierarchy Node ; Combinational ALUTs ; Dedicated Logic Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name ; Entity Name ; Library Name ;
++----------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+---------------------+-------------+--------------+
+; |relogio                   ; 0 (0)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 6    ; 0            ; |relogio            ; relogio     ; work         ;
++----------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+---------------------+-------------+--------------+
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
 
 
 Encoding Type:  One-Hot
-+------------------------------------------------------------------+
-; State Machine - |counter_test|counter:inst|rising_edge:$00002|ss ;
-+------+----+----+-------------------------------------------------+
-; Name ; s2 ; s1 ; s0                                              ;
-+------+----+----+-------------------------------------------------+
-; s0   ; 0  ; 0  ; 0                                               ;
-; s1   ; 0  ; 1  ; 1                                               ;
-; s2   ; 1  ; 0  ; 1                                               ;
-+------+----+----+-------------------------------------------------+
++-------------------------------------------------------------+
+; State Machine - |relogio|counter:hour|rising_edge:$00002|ss ;
++------+----+----+--------------------------------------------+
+; Name ; s2 ; s1 ; s0                                         ;
++------+----+----+--------------------------------------------+
+; s0   ; 0  ; 0  ; 0                                          ;
+; s1   ; 0  ; 1  ; 1                                          ;
+; s2   ; 1  ; 0  ; 1                                          ;
++------+----+----+--------------------------------------------+
 
 
 Encoding Type:  One-Hot
-+------------------------------------------------------------------+
-; State Machine - |counter_test|counter:inst|rising_edge:$00000|ss ;
-+------+----+----+-------------------------------------------------+
-; Name ; s2 ; s1 ; s0                                              ;
-+------+----+----+-------------------------------------------------+
-; s0   ; 0  ; 0  ; 0                                               ;
-; s1   ; 0  ; 1  ; 1                                               ;
-; s2   ; 1  ; 0  ; 1                                               ;
-+------+----+----+-------------------------------------------------+
++-------------------------------------------------------------+
+; State Machine - |relogio|counter:hour|rising_edge:$00000|ss ;
++------+----+----+--------------------------------------------+
+; Name ; s2 ; s1 ; s0                                         ;
++------+----+----+--------------------------------------------+
+; s0   ; 0  ; 0  ; 0                                          ;
+; s1   ; 0  ; 1  ; 1                                          ;
+; s2   ; 1  ; 0  ; 1                                          ;
++------+----+----+--------------------------------------------+
 
 
+Encoding Type:  One-Hot
 +------------------------------------------------------------+
-; Registers Removed During Synthesis                         ;
-+---------------------------------------+--------------------+
-; Register name                         ; Reason for Removal ;
-+---------------------------------------+--------------------+
-; counter:inst|rising_edge:$00002|s2    ; Lost fanout        ;
-; counter:inst|rising_edge:$00000|s2    ; Lost fanout        ;
-; Total Number of Removed Registers = 2 ;                    ;
-+---------------------------------------+--------------------+
+; State Machine - |relogio|counter:min|rising_edge:$00002|ss ;
++------+----+----+-------------------------------------------+
+; Name ; s2 ; s1 ; s0                                        ;
++------+----+----+-------------------------------------------+
+; s0   ; 0  ; 0  ; 0                                         ;
+; s1   ; 0  ; 1  ; 1                                         ;
+; s2   ; 1  ; 0  ; 1                                         ;
++------+----+----+-------------------------------------------+
+
+
+Encoding Type:  One-Hot
++------------------------------------------------------------+
+; State Machine - |relogio|counter:min|rising_edge:$00000|ss ;
++------+----+----+-------------------------------------------+
+; Name ; s2 ; s1 ; s0                                        ;
++------+----+----+-------------------------------------------+
+; s0   ; 0  ; 0  ; 0                                         ;
+; s1   ; 0  ; 1  ; 1                                         ;
+; s2   ; 1  ; 0  ; 1                                         ;
++------+----+----+-------------------------------------------+
+
+
+Encoding Type:  One-Hot
++------------------------------------------------------------+
+; State Machine - |relogio|counter:seg|rising_edge:$00002|ss ;
++------+----+----+-------------------------------------------+
+; Name ; s2 ; s1 ; s0                                        ;
++------+----+----+-------------------------------------------+
+; s0   ; 0  ; 0  ; 0                                         ;
+; s1   ; 0  ; 1  ; 1                                         ;
+; s2   ; 1  ; 0  ; 1                                         ;
++------+----+----+-------------------------------------------+
+
+
+Encoding Type:  One-Hot
++------------------------------------------------------------+
+; State Machine - |relogio|counter:seg|rising_edge:$00000|ss ;
++------+----+----+-------------------------------------------+
+; Name ; s2 ; s1 ; s0                                        ;
++------+----+----+-------------------------------------------+
+; s0   ; 0  ; 0  ; 0                                         ;
+; s1   ; 0  ; 1  ; 1                                         ;
+; s2   ; 1  ; 0  ; 1                                         ;
++------+----+----+-------------------------------------------+
+
+
++-------------------------------------------------------------+
+; Registers Removed During Synthesis                          ;
++----------------------------------------+--------------------+
+; Register name                          ; Reason for Removal ;
++----------------------------------------+--------------------+
+; counter:hour|rising_edge:$00002|s1     ; Lost fanout        ;
+; counter:hour|rising_edge:$00002|s2     ; Lost fanout        ;
+; counter:hour|rising_edge:$00002|s0     ; Lost fanout        ;
+; counter:hour|minvalue                  ; Lost fanout        ;
+; counter:hour|rising_edge:$00000|s1     ; Lost fanout        ;
+; counter:hour|rising_edge:$00000|s2     ; Lost fanout        ;
+; counter:hour|rising_edge:$00000|s0     ; Lost fanout        ;
+; counter:hour|maxvalue                  ; Lost fanout        ;
+; counter:min|rising_edge:$00002|s2      ; Lost fanout        ;
+; counter:min|rising_edge:$00000|s2      ; Lost fanout        ;
+; counter:seg|rising_edge:$00002|s2      ; Lost fanout        ;
+; counter:seg|rising_edge:$00000|s2      ; Lost fanout        ;
+; counter:min|minvalue                   ; Lost fanout        ;
+; counter:min|maxvalue                   ; Lost fanout        ;
+; counter:seg|minvalue                   ; Lost fanout        ;
+; counter:seg|maxvalue                   ; Lost fanout        ;
+; counter:hour|registers[0..5]           ; Lost fanout        ;
+; counter:min|registers[0..5]            ; Lost fanout        ;
+; counter:seg|registers[0..5]            ; Lost fanout        ;
+; generator_1s:divider|aux               ; Lost fanout        ;
+; generator_1s:divider|count[0..24]      ; Lost fanout        ;
+; counter:min|rising_edge:$00002|s0      ; Lost fanout        ;
+; counter:min|rising_edge:$00002|s1      ; Lost fanout        ;
+; counter:min|rising_edge:$00000|s0      ; Lost fanout        ;
+; counter:min|rising_edge:$00000|s1      ; Lost fanout        ;
+; counter:seg|rising_edge:$00002|s0      ; Lost fanout        ;
+; counter:seg|rising_edge:$00002|s1      ; Lost fanout        ;
+; counter:seg|rising_edge:$00000|s0      ; Lost fanout        ;
+; counter:seg|rising_edge:$00000|s1      ; Lost fanout        ;
+; Total Number of Removed Registers = 68 ;                    ;
++----------------------------------------+--------------------+
+
+
++-------------------------------------------------------------------------------------------------------------------------------------------------+
+; Removed Registers Triggering Further Register Optimizations                                                                                     ;
++------------------------------------+--------------------+---------------------------------------------------------------------------------------+
+; Register name                      ; Reason for Removal ; Registers Removed due to This Register                                                ;
++------------------------------------+--------------------+---------------------------------------------------------------------------------------+
+; counter:seg|rising_edge:$00002|s2  ; Lost Fanouts       ; counter:seg|minvalue, counter:seg|registers[1], counter:seg|registers[0],             ;
+;                                    ;                    ; counter:seg|registers[5], counter:seg|registers[4], counter:seg|registers[3],         ;
+;                                    ;                    ; counter:seg|registers[2], generator_1s:divider|aux, generator_1s:divider|count[24],   ;
+;                                    ;                    ; generator_1s:divider|count[23], generator_1s:divider|count[22],                       ;
+;                                    ;                    ; generator_1s:divider|count[21], generator_1s:divider|count[20],                       ;
+;                                    ;                    ; generator_1s:divider|count[19], generator_1s:divider|count[0],                        ;
+;                                    ;                    ; generator_1s:divider|count[1], generator_1s:divider|count[2],                         ;
+;                                    ;                    ; generator_1s:divider|count[3], generator_1s:divider|count[4],                         ;
+;                                    ;                    ; counter:seg|rising_edge:$00002|s0                                                     ;
+; counter:min|rising_edge:$00002|s2  ; Lost Fanouts       ; counter:min|minvalue, counter:min|registers[1], counter:min|registers[0],             ;
+;                                    ;                    ; counter:min|registers[5], counter:min|registers[4], counter:min|registers[3],         ;
+;                                    ;                    ; counter:min|registers[2], counter:min|rising_edge:$00002|s0,                          ;
+;                                    ;                    ; counter:seg|rising_edge:$00002|s1, counter:seg|rising_edge:$00000|s1                  ;
+; counter:hour|rising_edge:$00002|s1 ; Lost Fanouts       ; counter:hour|rising_edge:$00002|s0, counter:hour|minvalue, counter:hour|registers[1], ;
+;                                    ;                    ; counter:hour|registers[0], counter:hour|registers[5], counter:hour|registers[4],      ;
+;                                    ;                    ; counter:hour|registers[3], counter:min|rising_edge:$00002|s1,                         ;
+;                                    ;                    ; counter:min|rising_edge:$00000|s1                                                     ;
+; counter:hour|rising_edge:$00000|s1 ; Lost Fanouts       ; counter:hour|rising_edge:$00000|s0, counter:hour|maxvalue, counter:hour|registers[2]  ;
+; counter:min|rising_edge:$00000|s2  ; Lost Fanouts       ; counter:min|maxvalue, counter:min|rising_edge:$00000|s0                               ;
+; counter:seg|rising_edge:$00000|s2  ; Lost Fanouts       ; counter:seg|maxvalue, counter:seg|rising_edge:$00000|s0                               ;
++------------------------------------+--------------------+---------------------------------------------------------------------------------------+
 
 
 +------------------------------------------------------+
@@ -261,7 +367,7 @@ Encoding Type:  One-Hot
 +----------------------------------------------+-------+
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
-; Total registers                              ; 12    ;
+; Total registers                              ; 0     ;
 ; Number of registers using Synchronous Clear  ; 0     ;
 ; Number of registers using Synchronous Load   ; 0     ;
 ; Number of registers using Asynchronous Clear ; 0     ;
@@ -273,25 +379,14 @@ Encoding Type:  One-Hot
 
 +-----------------------------------------------------+
 ; Post-Synthesis Netlist Statistics for Top Partition ;
-+-----------------------+-----------------------------+
-; Type                  ; Count                       ;
-+-----------------------+-----------------------------+
-; boundary_port         ; 16                          ;
-; cycloneiii_ff         ; 12                          ;
-;     plain             ; 12                          ;
-; cycloneiii_lcell_comb ; 41                          ;
-;     arith             ; 14                          ;
-;         2 data inputs ; 8                           ;
-;         3 data inputs ; 6                           ;
-;     normal            ; 27                          ;
-;         1 data inputs ; 2                           ;
-;         2 data inputs ; 5                           ;
-;         3 data inputs ; 2                           ;
-;         4 data inputs ; 18                          ;
-;                       ;                             ;
-; Max LUT depth         ; 4.00                        ;
-; Average LUT depth     ; 2.98                        ;
-+-----------------------+-----------------------------+
++-------------------+---------------------------------+
+; Type              ; Count                           ;
++-------------------+---------------------------------+
+; boundary_port     ; 6                               ;
+;                   ;                                 ;
+; Max LUT depth     ; 0.00                            ;
+; Average LUT depth ; 0.00                            ;
++-------------------+---------------------------------+
 
 
 +-------------------------------+
@@ -299,7 +394,7 @@ Encoding Type:  One-Hot
 +----------------+--------------+
 ; Partition Name ; Elapsed Time ;
 +----------------+--------------+
-; Top            ; 00:00:01     ;
+; Top            ; 00:00:00     ;
 +----------------+--------------+
 
 
@@ -309,37 +404,47 @@ Encoding Type:  One-Hot
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 18.0.0 Build 614 04/24/2018 SJ Lite Edition
-    Info: Processing started: Fri Sep 21 11:43:08 2018
+    Info: Processing started: Fri Sep 21 23:51:39 2018
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off digital_clock -c digital_clock
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (20030): Parallel compilation is enabled and will use 2 of the 2 processors detected
-Info (12021): Found 1 design units, including 1 entities, in source file modules/auxiliary/rising_edge.tdf
-    Info (12023): Found entity 1: rising_edge File: C:/Users/Duda/Documents/GitHub/[Eletronica Digital]/digital_clock_v2/modules/auxiliary/Rising_Edge.tdf Line: 3
+Info (12021): Found 1 design units, including 1 entities, in source file modules/auxiliary/Rising_Edge.tdf
+    Info (12023): Found entity 1: rising_edge File: /home/breno/Breno Pedro/Faculdade/digital_clock_v2/modules/auxiliary/Rising_Edge.tdf Line: 3
 Info (12021): Found 1 design units, including 1 entities, in source file counter.tdf
-    Info (12023): Found entity 1: counter File: C:/Users/Duda/Documents/GitHub/[Eletronica Digital]/digital_clock_v2/counter.tdf Line: 7
+    Info (12023): Found entity 1: counter File: /home/breno/Breno Pedro/Faculdade/digital_clock_v2/counter.tdf Line: 7
 Info (12021): Found 1 design units, including 1 entities, in source file generator_1s.tdf
-    Info (12023): Found entity 1: generator_1s File: C:/Users/Duda/Documents/GitHub/[Eletronica Digital]/digital_clock_v2/generator_1s.tdf Line: 3
+    Info (12023): Found entity 1: generator_1s File: /home/breno/Breno Pedro/Faculdade/digital_clock_v2/generator_1s.tdf Line: 3
 Info (12021): Found 1 design units, including 1 entities, in source file generator_1s_test.bdf
     Info (12023): Found entity 1: generator_1s_test
-Info (12021): Found 1 design units, including 1 entities, in source file counter_test.bdf
-    Info (12023): Found entity 1: counter_test
 Info (12021): Found 1 design units, including 1 entities, in source file rising_edge_test.bdf
     Info (12023): Found entity 1: rising_edge_test
-Info (12127): Elaborating entity "counter_test" for the top level hierarchy
-Info (12128): Elaborating entity "counter" for hierarchy "counter:inst"
-Info (12128): Elaborating entity "rising_edge" for hierarchy "counter:inst|rising_edge:$00000" File: C:/Users/Duda/Documents/GitHub/[Eletronica Digital]/digital_clock_v2/counter.tdf Line: 32
-Info (286030): Timing-Driven Synthesis is running
-Info (17049): 2 registers lost all their fanouts during netlist optimizations.
+Warning (287004): Group name "max" is missing brackets ([ ]) File: /home/breno/Breno Pedro/Faculdade/digital_clock_v2/relogio.tdf Line: 15
+Warning (287004): Group name "max" is missing brackets ([ ]) File: /home/breno/Breno Pedro/Faculdade/digital_clock_v2/relogio.tdf Line: 16
+Warning (287004): Group name "max" is missing brackets ([ ]) File: /home/breno/Breno Pedro/Faculdade/digital_clock_v2/relogio.tdf Line: 17
+Info (12021): Found 1 design units, including 1 entities, in source file relogio.tdf
+    Info (12023): Found entity 1: relogio File: /home/breno/Breno Pedro/Faculdade/digital_clock_v2/relogio.tdf Line: 4
+Info (12127): Elaborating entity "relogio" for the top level hierarchy
+Info (12128): Elaborating entity "counter" for hierarchy "counter:seg" File: /home/breno/Breno Pedro/Faculdade/digital_clock_v2/relogio.tdf Line: 9
+Info (12128): Elaborating entity "rising_edge" for hierarchy "counter:seg|rising_edge:$00000" File: /home/breno/Breno Pedro/Faculdade/digital_clock_v2/counter.tdf Line: 33
+Info (12128): Elaborating entity "counter" for hierarchy "counter:hour" File: /home/breno/Breno Pedro/Faculdade/digital_clock_v2/relogio.tdf Line: 11
+Info (12128): Elaborating entity "generator_1s" for hierarchy "generator_1s:divider" File: /home/breno/Breno Pedro/Faculdade/digital_clock_v2/relogio.tdf Line: 12
+Info (17049): 68 registers lost all their fanouts during netlist optimizations.
 Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
     Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
-Info (21057): Implemented 60 device resources after synthesis - the final resource count might be different
-    Info (21058): Implemented 9 input pins
-    Info (21059): Implemented 7 output pins
-    Info (21061): Implemented 44 logic cells
-Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 1 warning
-    Info: Peak virtual memory: 4767 megabytes
-    Info: Processing ended: Fri Sep 21 11:43:31 2018
-    Info: Elapsed time: 00:00:23
-    Info: Total CPU time (on all processors): 00:00:44
+Warning (21074): Design contains 6 input pin(s) that do not drive logic
+    Warning (15610): No output dependent on input pin "system_clock" File: /home/breno/Breno Pedro/Faculdade/digital_clock_v2/relogio.tdf Line: 6
+    Warning (15610): No output dependent on input pin "SW1" File: /home/breno/Breno Pedro/Faculdade/digital_clock_v2/relogio.tdf Line: 6
+    Warning (15610): No output dependent on input pin "KEY3" File: /home/breno/Breno Pedro/Faculdade/digital_clock_v2/relogio.tdf Line: 6
+    Warning (15610): No output dependent on input pin "KEY1" File: /home/breno/Breno Pedro/Faculdade/digital_clock_v2/relogio.tdf Line: 6
+    Warning (15610): No output dependent on input pin "KEY4" File: /home/breno/Breno Pedro/Faculdade/digital_clock_v2/relogio.tdf Line: 6
+    Warning (15610): No output dependent on input pin "KEY2" File: /home/breno/Breno Pedro/Faculdade/digital_clock_v2/relogio.tdf Line: 6
+Info (21057): Implemented 6 device resources after synthesis - the final resource count might be different
+    Info (21058): Implemented 6 input pins
+    Info (21059): Implemented 0 output pins
+Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 11 warnings
+    Info: Peak virtual memory: 941 megabytes
+    Info: Processing ended: Fri Sep 21 23:51:56 2018
+    Info: Elapsed time: 00:00:17
+    Info: Total CPU time (on all processors): 00:00:40
 
 

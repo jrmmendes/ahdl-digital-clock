@@ -1,0 +1,46 @@
+INCLUDE "counter.inc";
+INCLUDE "generator_1s.inc";
+
+SUBDESIGN relogio
+(
+	system_clock, SW1, KEY1, KEY2, KEY3, KEY4 : INPUT;
+)
+VARIABLE
+	seg  : counter;
+	min  : counter;
+	hour : counter;
+	divider : generator_1s;
+	
+BEGIN 
+	seg.max  = B"111100"; 
+	min.max  = B"111100"; 
+	hour.max = B"011000"; 
+	seg.system_clock = system_clock;
+	min.system_clock = system_clock;
+	hour.system_clock = system_clock;
+	divider.clock_in = system_clock;
+	
+	IF SW1 == VCC THEN		    %chave de ajuste acionada%
+		IF KEY1 == GND THEN      %normalmente fechado% 
+			min.updown = VCC;
+			min.clock = VCC;	    %incrementa minutos%
+		ELSIF KEY2 == GND THEN
+			min.updown = GND;
+			min.clock = VCC; 	    %decrementa minutos%
+		END IF;
+		IF KEY3 == GND THEN 
+			hour.updown = VCC;
+			hour.clock = VCC;	    %incrementa hora%
+		ELSIF KEY4 == GND THEN   %decrementa hora%
+			hour.updown = GND;
+			hour.clock = VCC;
+		END IF;
+		ELSE
+			seg.updown = VCC;
+			min.updown = VCC;
+			hour.updown = VCC;
+			seg.clock = divider.clock_out;
+			min.clock = seg.EOC;
+			hour.clock = min.EOC;
+	END IF;	
+END; 
