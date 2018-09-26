@@ -1,46 +1,83 @@
 INCLUDE "counter.inc";
 INCLUDE "generator_1s.inc";
+FUNCTION rising_edge (clock, signal)
+	RETURNS (upsignal);
+
 
 SUBDESIGN relogio
 (
 	system_clock, SW1, KEY1, KEY2, KEY3, KEY4 : INPUT;
+	dseg[5..0], dmin[5..0], dhour[5..0]: OUTPUT; %exibe os valores decimais de seg, min, e hora%
+
 )
 VARIABLE
 	seg  : counter;
 	min  : counter;
 	hour : counter;
 	divider : generator_1s;
+	key_reg[3..0] : DFF; %banco de flipflops pra os botões%
 	
 BEGIN 
-	seg.max  = B"111100"; 
-	min.max  = B"111100"; 
-	hour.max = B"011000"; 
+	seg.max[]  = B"111011";
+	min.max[]  = B"111011";
+	hour.max[] = B"010111"; 
+	
+	dseg[] = seg.counter[];
+	dmin[] = min.counter[];
+	dhour[] = hour.counter[];
+	
+	key_reg[].clk = system_clock;
+	
 	seg.system_clock = system_clock;
 	min.system_clock = system_clock;
 	hour.system_clock = system_clock;
 	divider.clock_in = system_clock;
 	
 	IF SW1 == VCC THEN		    %chave de ajuste acionada%
-		IF KEY1 == GND THEN      %normalmente fechado% 
+		
+		min.clock = rising_edge (system_clock, key_reg[0].q) # rising_edge (system_clock, key_reg[1].q) ;
+		hour.clock = rising_edge (system_clock, key_reg[2].q) # rising_edge (system_clock, key_reg[3].q) ;
+		
+		IF KEY1 == VCC THEN      %normalmente fechado% 
+
 			min.updown = VCC;
-			min.clock = VCC;	    %incrementa minutos%
-		ELSIF KEY2 == GND THEN
+			key_reg[0].d = VCC;	    %incrementa minutos%
+		
+		ELSIF KEY2 == VCC THEN
+		
 			min.updown = GND;
-			min.clock = VCC; 	    %decrementa minutos%
-		END IF;
-		IF KEY3 == GND THEN 
-			hour.updown = VCC;
-			hour.clock = VCC;	    %incrementa hora%
-		ELSIF KEY4 == GND THEN   %decrementa hora%
-			hour.updown = GND;
-			hour.clock = VCC;
-		END IF;
+			key_reg[1].d = VCC; 	    %decrementa minutos%
+	
 		ELSE
-			seg.updown = VCC;
-			min.updown = VCC;
+		
+			key_reg[1..0].d = B"00";      %baixa o valor do clock%
+		
+		END IF;
+		
+		IF KEY3 == VCC THEN
+		
 			hour.updown = VCC;
-			seg.clock = divider.clock_out;
-			min.clock = seg.EOC;
-			hour.clock = min.EOC;
+			key_reg[2].d = VCC;	    %incrementa hora%
+	
+		ELSIF KEY4 == VCC THEN   %decrementa hora%
+		
+			hour.updown = GND;
+			key_reg[3].d = VCC;
+		
+		ELSE
+			
+			key_reg[3..2].d = B"00";
+		
+		END IF;
+		
+	ELSE
+		
+		seg.updown = VCC;
+		min.updown = VCC;
+		hour.updown = VCC;
+		seg.clock = divider.clock_out ; 
+		min.clock = seg.EOC;
+		hour.clock = min.EOC;
+		
 	END IF;	
 END; 
