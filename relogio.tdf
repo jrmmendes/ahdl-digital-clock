@@ -1,3 +1,5 @@
+TITLE "Relogio";
+
 INCLUDE "counter.inc";
 INCLUDE "generator_1s.inc";
 FUNCTION rising_edge (clock, signal)
@@ -6,8 +8,8 @@ FUNCTION rising_edge (clock, signal)
 
 SUBDESIGN relogio
 (
-	system_clock, SW1, KEY1, KEY2, KEY3, KEY4 : INPUT;
-	dseg[5..0], dmin[5..0], dhour[5..0]: OUTPUT; %exibe os valores decimais de seg, min, e hora%
+	system_clock, adjust_switch, incbutton_min, decbutton_min, incbutton_hour, decbutton_hour : INPUT;
+	out_hour[5..0], out_min[5..0], out_seg[5..0]: OUTPUT; %exibe os valores binarios de seg, min, e hora%
 
 )
 VARIABLE
@@ -22,9 +24,9 @@ BEGIN
 	min.max[]  = B"111011";
 	hour.max[] = B"010111"; 
 	
-	dseg[] = seg.counter[];
-	dmin[] = min.counter[];
-	dhour[] = hour.counter[];
+	out_seg[] = seg.counter[];
+	out_min[] = min.counter[];
+	out_hour[] = hour.counter[];
 	
 	key_reg[].clk = system_clock;
 	
@@ -33,17 +35,17 @@ BEGIN
 	hour.system_clock = system_clock;
 	divider.clock_in = system_clock;
 	
-	IF SW1 == VCC THEN		    %chave de ajuste acionada%
+	IF adjust_switch == VCC THEN		    %chave de ajuste acionada%
 		
 		min.clock = rising_edge (system_clock, key_reg[0].q) # rising_edge (system_clock, key_reg[1].q) ;
 		hour.clock = rising_edge (system_clock, key_reg[2].q) # rising_edge (system_clock, key_reg[3].q) ;
 		
-		IF KEY1 == VCC THEN      %normalmente fechado% 
+		IF incbutton_min == VCC THEN      %normalmente fechado% 
 
 			min.updown = VCC;
 			key_reg[0].d = VCC;	    %incrementa minutos%
 		
-		ELSIF KEY2 == VCC THEN
+		ELSIF decbutton_min == VCC THEN
 		
 			min.updown = GND;
 			key_reg[1].d = VCC; 	    %decrementa minutos%
@@ -54,12 +56,12 @@ BEGIN
 		
 		END IF;
 		
-		IF KEY3 == VCC THEN
+		IF incbutton_hour == VCC THEN
 		
 			hour.updown = VCC;
 			key_reg[2].d = VCC;	    %incrementa hora%
 	
-		ELSIF KEY4 == VCC THEN   %decrementa hora%
+		ELSIF decbutton_hour == VCC THEN   %decrementa hora%
 		
 			hour.updown = GND;
 			key_reg[3].d = VCC;

@@ -1,5 +1,11 @@
 TITLE "Modulo de controle do cronometro";
 
+INCLUDE "counter.inc";
+INCLUDE "generator_1s.inc";
+FUNCTION rising_edge (clock, signal)
+	RETURNS (upsignal);
+
+
 SUBDESIGN cronometer (
 
 

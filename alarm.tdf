@@ -1,9 +1,76 @@
-TITLE "Modulo de controle do alarme";
+TITLE "Alarm";
 
-SUBDESIGN alarm (
+INCLUDE "counter.inc";
+FUNCTION rising_edge (clock, signal)
+	RETURNS (upsignal);
+
+
+SUBDESIGN alarm
+(
+	system_clock, adjust_switch, incbutton_min, decbutton_min, incbutton_hour, decbutton_hour : INPUT;
+	out_hour[5..0], out_min[5..0]: OUTPUT;		 %exibe os valores binarios de hora e min%
 
 )
+VARIABLE
 
-BEGIN
-  
-END;
+	min  : counter;
+	hour : counter;
+	key_reg[3..0] : DFF; %banco de flipflops pra os botões%
+	
+BEGIN 
+									
+	min.max[]  = B"111011";		%configura os valores maximos de cada contador%
+	hour.max[] = B"010111"; 
+	
+	out_min[] = min.counter[];		%saida recebe o valor dos contadores%
+	out_hour[] = hour.counter[];
+	
+	key_reg[].clk = system_clock;		
+	
+	min.system_clock = system_clock;
+	hour.system_clock = system_clock;
+	
+	IF adjust_switch == VCC THEN		    %chave de ajuste acionada%
+		
+		min.clock = rising_edge (system_clock, key_reg[0].q) # rising_edge (system_clock, key_reg[1].q) ; %utiliza os pulsos de subida dos registradores dos botoes como clock%
+		hour.clock = rising_edge (system_clock, key_reg[2].q) # rising_edge (system_clock, key_reg[3].q) ;
+		
+		IF incbutton_min == VCC THEN		%logica para definicao do valor das entradas updown e registradores dos botoes% 
+
+			min.updown = VCC;
+			key_reg[0].d = VCC;	    
+		
+		ELSIF decbutton_min == VCC THEN
+		
+			min.updown = GND;
+			key_reg[1].d = VCC; 	   
+	
+		ELSE
+		
+			key_reg[1..0].d = B"00";      %garante um valor baixo para os botoes%
+		
+		END IF;
+		
+		IF incbutton_hour == VCC THEN
+		
+			hour.updown = VCC;
+			key_reg[2].d = VCC;	    
+	
+		ELSIF decbutton_hour == VCC THEN   
+		
+			hour.updown = GND;
+			key_reg[3].d = VCC;
+		
+		ELSE
+			
+			key_reg[3..2].d = B"00";
+		
+		END IF;
+		
+	ELSE
+		 
+		min.clock = GND;
+		hour.clock = GND;
+		
+	END IF;	
+END; 
