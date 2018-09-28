@@ -17,20 +17,22 @@ VARIABLE
 	min  : counter;
 	hour : counter;
 	divider : generator_1s;
-	key_reg[1..0] : DFF; %banco de flipflops pra os botões%
-	key2_reg[1..0] : TFF;
+	key_reg[1..0] : TFF;			%banco de flipflops pra os botões%
 	
 BEGIN 
 	seg.max[]  = B"111011";
 	min.max[]  = B"111011";
 	hour.max[] = B"010111"; 
 	
+	seg.updown = VCC;
+	min.updown = VCC;
+	hour.updown = VCC;
+	
 	out_seg[] = seg.counter[];
 	out_min[] = min.counter[];
 	out_hour[] = hour.counter[];
 	
 	key_reg[].clk = system_clock;
-	key2_reg[].clk = system_clock;
 	
 	seg.system_clock = system_clock;
 	min.system_clock = system_clock;
@@ -39,35 +41,34 @@ BEGIN
 	
 	IF cronometer_switch == VCC THEN		    %chave do cronometro acionada%
 		
-		If rising_edge(system_clock, start_button) THEN
-			key_reg[0].d = B"1";
-			key_reg[1].d = B"0";
-			key2_reg[1..0].t = B"01";
-			IF key2_reg[1].q == B"1" THEN
-				key2_reg[1].t = B"1";
-			END IF;	
+		IF rising_edge(system_clock, start_button) THEN
+			key_reg[1..0].t = B"01";
+			IF key_reg[1].q == B"1" THEN
+				key_reg[1].t = B"1";
+			END IF;
 				
 		ELSIF rising_edge(system_clock, reset_button) THEN
-			key_reg[1].d = B"1";
-			key_reg[0].d = B"0";
-			key2_reg[1..0] = B"10";
-			
+			key_reg[1..0].t = B"10";
+		
 		END IF;
 		
 		
-		IF key2_reg[].q == B"01" THEN
-			seg.updown = VCC;
-			min.updown = VCC;
-			hour.updown = VCC;
-			seg.clock = divider.clock_out ; 
+		IF key_reg[].q == B"01" THEN
+
+			seg.clock = divider.clock_out; 
 			min.clock = seg.EOC;
 			hour.clock = min.EOC;
+		
+		ELSIF key_reg[].q == B"00" THEN
+			seg.clock = GND; 
+			min.clock = GND;
+			hour.clock = GND;
 				
-		ELSIF key2_reg[].q == B"10" # key2_reg[].q == B"11" THEN
+		ELSIF key_reg[].q == B"10" # key_reg[].q == B"11" THEN
 			out_seg[] = B"000000";
 			out_min[] = B"000000";
 			out_hour[] = B"000000";
-			key2_reg[1].t = B"1";
+			key_reg[1].t = B"1";
 		END IF;
 
 	END IF;	
