@@ -53,7 +53,7 @@ BEGIN
 		END IF;
 		
 		
-		IF key_reg[].q == B"01" THEN
+		IF key_reg[].q == B"01" # key_reg[].q == B"11" THEN
 
 			seg.clock = divider.clock_out; 
 			min.clock = seg.EOC;
@@ -64,10 +64,10 @@ BEGIN
 			min.clock = GND;
 			hour.clock = GND;
 				
-		ELSIF key_reg[].q == B"10" # key_reg[].q == B"11" THEN
-			out_seg[] = B"000000";
-			out_min[] = B"000000";
-			out_hour[] = B"000000";
+		ELSIF key_reg[].q == B"10" THEN
+			seg.reset = VCC;
+			min.reset = VCC;
+			hour.reset = VCC;
 			key_reg[1].t = B"1";
 		END IF;
 

@@ -7,7 +7,7 @@ FUNCTION rising_edge (clock, signal)
 SUBDESIGN counter
 (
   clock, system_clock, max[5..0] : INPUT;  %clock de entrada em segundos, pino de subida ou descida, modulo da contagem%
-  updown : INPUT;
+  updown, reset: INPUT;
   EOC, counter[5..0]: OUTPUT;   %indica o fim da contagem, numero da contagem%
   
 )
@@ -30,7 +30,7 @@ BEGIN
 	minvalue.clk = clock;
 	
 	counter[] = registers[].q;
-	EOC = rising_edge(system_clock, maxvalue.q) # rising_edge(system_clock, minvalue.q);				%indicador de fim de contagem %
+	EOC = rising_edge(system_clock, maxvalue.q) # rising_edge(system_clock, minvalue.q);				%indicador de fim de contagem%
 	
 	IF updown == VCC THEN 							%logica de contagem crescente%
 		
@@ -68,4 +68,11 @@ BEGIN
 		END IF;
 		
 	END IF;
+	
+	IF reset == VCC THEN
+		registers[].clrn = GND;
+	ELSE
+		registers[].clrn = VCC;
+	END IF;
+	
 END;

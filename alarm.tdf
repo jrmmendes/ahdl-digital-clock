@@ -25,6 +25,9 @@ BEGIN
 	out_min[] = min.counter[];		%saida recebe o valor dos contadores%
 	out_hour[] = hour.counter[];
 	
+	min.reset = GND;
+	hour.reset = GND;
+	
 	key_reg[].clk = system_clock;		
 	
 	min.system_clock = system_clock;

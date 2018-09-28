@@ -22,7 +22,11 @@ VARIABLE
 BEGIN 
 	seg.max[]  = B"111011";
 	min.max[]  = B"111011";
-	hour.max[] = B"010111"; 
+	hour.max[] = B"010111";
+
+	seg.reset = GND;
+	min.reset = GND;
+	hour.reset = GND;
 	
 	out_seg[] = seg.counter[];
 	out_min[] = min.counter[];

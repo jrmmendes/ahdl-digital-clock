@@ -4,7 +4,7 @@ editor if you plan to continue editing the block that represents it in
 the Block Editor! File corruption is VERY likely to occur.
 */
 /*
-Copyright (C) 2018  Intel Corporation. All rights reserved.
+Copyright (C) 2017  Intel Corporation. All rights reserved.
 Your use of Intel Corporation's design tools, logic functions 
 and other software and tools, and its AMPP partner logic 
 functions, and any output files from any of the foregoing 
@@ -21,7 +21,7 @@ refer to the applicable agreement for further details.
 (header "graphic" (version "1.4"))
 (pin
 	(input)
-	(rect 32 200 200 216)
+	(rect 32 184 200 200)
 	(text "INPUT" (rect 125 0 153 10)(font "Arial" (font_size 6)))
 	(text "max[5..0]" (rect 5 0 52 12)(font "Arial" ))
 	(pt 168 8)
@@ -53,7 +53,7 @@ refer to the applicable agreement for further details.
 )
 (pin
 	(input)
-	(rect 32 184 200 200)
+	(rect 16 208 184 224)
 	(text "INPUT" (rect 125 0 153 10)(font "Arial" (font_size 6)))
 	(text "updown" (rect 5 0 42 17)(font "Intel Clear" ))
 	(pt 168 8)
@@ -71,7 +71,23 @@ refer to the applicable agreement for further details.
 	(input)
 	(rect 32 168 200 184)
 	(text "INPUT" (rect 125 0 153 10)(font "Arial" (font_size 6)))
-	(text "system_clock" (rect 5 0 70 17)(font "Intel Clear" ))
+	(text "system_clock" (rect 5 0 69 17)(font "Intel Clear" ))
+	(pt 168 8)
+	(drawing
+		(line (pt 84 12)(pt 109 12))
+		(line (pt 84 4)(pt 109 4))
+		(line (pt 113 8)(pt 168 8))
+		(line (pt 84 12)(pt 84 4))
+		(line (pt 109 4)(pt 113 8))
+		(line (pt 109 12)(pt 113 8))
+	)
+	(text "VCC" (rect 128 7 148 17)(font "Arial" (font_size 6)))
+)
+(pin
+	(input)
+	(rect 16 288 184 304)
+	(text "INPUT" (rect 125 0 153 10)(font "Arial" (font_size 6)))
+	(text "reset" (rect 5 0 30 12)(font "Arial" ))
 	(pt 168 8)
 	(drawing
 		(line (pt 84 12)(pt 109 12))
@@ -116,9 +132,9 @@ refer to the applicable agreement for further details.
 	)
 )
 (symbol
-	(rect 264 128 472 240)
+	(rect 288 128 496 272)
 	(text "counter" (rect 5 0 41 12)(font "Arial" ))
-	(text "inst" (rect 8 96 25 108)(font "Arial" ))
+	(text "inst" (rect 8 128 25 140)(font "Arial" ))
 	(port
 		(pt 0 32)
 		(input)
@@ -136,66 +152,89 @@ refer to the applicable agreement for further details.
 	(port
 		(pt 0 64)
 		(input)
-		(text "updown" (rect 0 0 36 12)(font "Arial" ))
-		(text "updown" (rect 21 59 57 71)(font "Arial" ))
-		(line (pt 0 64)(pt 16 64))
+		(text "max[5..0]" (rect 0 0 47 12)(font "Arial" ))
+		(text "max[5..0]" (rect 21 59 68 71)(font "Arial" ))
+		(line (pt 0 64)(pt 16 64)(line_width 3))
 	)
 	(port
 		(pt 0 80)
 		(input)
-		(text "max[5..0]" (rect 0 0 47 12)(font "Arial" ))
-		(text "max[5..0]" (rect 21 75 68 87)(font "Arial" ))
-		(line (pt 0 80)(pt 16 80)(line_width 3))
+		(text "updown" (rect 0 0 36 12)(font "Arial" ))
+		(text "updown" (rect 21 75 57 87)(font "Arial" ))
+		(line (pt 0 80)(pt 16 80))
+	)
+	(port
+		(pt 0 96)
+		(input)
+		(text "reset" (rect 0 0 24 12)(font "Arial" ))
+		(text "reset" (rect 21 91 45 103)(font "Arial" ))
+		(line (pt 0 96)(pt 16 96))
 	)
 	(port
 		(pt 208 32)
 		(output)
 		(text "EOC" (rect 0 0 23 12)(font "Arial" ))
-		(text "EOC" (rect 168 27 191 39)(font "Arial" ))
+		(text "EOC" (rect 168 27 187 39)(font "Arial" ))
 		(line (pt 208 32)(pt 192 32))
 	)
 	(port
 		(pt 208 48)
 		(output)
 		(text "counter[5..0]" (rect 0 0 62 12)(font "Arial" ))
-		(text "counter[5..0]" (rect 135 43 197 55)(font "Arial" ))
+		(text "counter[5..0]" (rect 135 43 187 55)(font "Arial" ))
 		(line (pt 208 48)(pt 192 48)(line_width 3))
 	)
 	(drawing
-		(rectangle (rect 16 16 192 96))
+		(rectangle (rect 16 16 192 128))
 	)
-)
-(connector
-	(pt 472 160)
-	(pt 536 160)
-)
-(connector
-	(pt 472 176)
-	(pt 584 176)
-	(bus)
-)
-(connector
-	(pt 200 208)
-	(pt 264 208)
-	(bus)
-)
-(connector
-	(pt 200 192)
-	(pt 264 192)
 )
 (connector
 	(pt 208 144)
 	(pt 200 144)
 )
 (connector
+	(pt 536 160)
+	(pt 496 160)
+)
+(connector
+	(pt 584 176)
+	(pt 496 176)
+	(bus)
+)
+(connector
 	(pt 208 144)
 	(pt 208 160)
 )
 (connector
-	(pt 264 160)
-	(pt 208 160)
+	(pt 184 296)
+	(pt 184 224)
 )
 (connector
-	(pt 264 176)
+	(pt 208 160)
+	(pt 288 160)
+)
+(connector
 	(pt 200 176)
+	(pt 288 176)
+)
+(connector
+	(pt 184 224)
+	(pt 288 224)
+)
+(connector
+	(pt 192 216)
+	(pt 184 216)
+)
+(connector
+	(pt 192 216)
+	(pt 192 208)
+)
+(connector
+	(pt 192 208)
+	(pt 288 208)
+)
+(connector
+	(pt 200 192)
+	(pt 288 192)
+	(bus)
 )
