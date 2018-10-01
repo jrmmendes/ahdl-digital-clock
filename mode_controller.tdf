@@ -1,14 +1,82 @@
 TITLE "Modulo de controle das entradas";
+INCLUDE "generator_1s";
 
-SUBDESIGN(
-  view_sw[1..0]  : INPUT; 
-  mode_sw        : INPUT; 
+
+SUBDESIGN mode_controller
+(
+  view_sw[2..0]  : INPUT; 
+  ajuste_sw      : INPUT; 
   alarm_sw[1..0] : INPUT;
+  alarme_comparador : INPUT;
+  system_clock   : INPUT;
+  
+  sel[1..0]      : OUTPUT;
+  leds           : OUTPUT;
+  ajuste[3..0]   : OUTPUT; 
+  
 )
-
+VARIABLE
+	piscar : generator_1s;
+	
 BEGIN 
-  TABLE
-  END TABLE;
+	IF view_sw[] == B"000" THEN  % view_sw = 000 => exibe relógio + ajuste_sw = 1 => relógio ajuste %
+		sel[] = B"00";
+		
+		IF ajuste_sw == B"1" THEN
+			ajuste[] = B"0001";
+		
+		ELSE
+			ajuste[] = B"0000";
+		
+		END IF;
+		
+	
+	ELSIF view_sw[] == B"001" THEN %	view_sw = 001 => exibe cronômetro, ajuste_sw = don't care %
+		sel[] = B"01";
+		ajuste[] = B"1000";
+	
+	
+	ELSIF view_sw[] == B"010" THEN %	view_sw = 010 => exibe alarme1 + ajuste_sw = 1 => alarme1 ajuste %
+		sel[] = B"10";
+	
+		IF ajuste_sw == B"1" THEN
+			ajuste[] = B"0010";
+		ELSE
+			ajuste[] = B"0000";
+		END IF;
+	
+		
+	ELSIF view_sw[] == B"110" THEN %	view_sw = 110 => exibe alarme2 + ajuste_sw = 1 => alarme2 ajuste %
+		sel[] = B"11";
+		
+		IF ajuste_sw == B"1" THEN
+			ajuste[] = B"0100";
+		ELSE
+			ajuste[] = B"0000";
+		END IF;
+	
+	ELSE % else exibe relógio %
+		sel[] = B"00";
+		ajuste[] = B"0000";
+	
+	END IF;
+	
+	piscar.clock_in = system_clock; % controle dos alarmes %
+	
+	IF alarm_sw[] == B"00" THEN
+		leds = GND;
+		
+	ELSE
+		IF alarme_comparador == VCC THEN
+			leds= piscar.clock_out;
+			
+		ELSE 
+			leds = GND;
+		END IF;
+		
+	END IF;
+	
+
 
 
 END;
