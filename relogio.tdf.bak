@@ -44,8 +44,6 @@ BEGIN
 		min.clock = rising_edge (system_clock, key_reg[0].q) # rising_edge (system_clock, key_reg[1].q) ;
 		hour.clock = rising_edge (system_clock, key_reg[2].q) # rising_edge (system_clock, key_reg[3].q) ;
 		
-		seg.updown = VCC;
-		
 		IF incbutton_min == VCC THEN      %normalmente fechado% 
 
 			min.updown = VCC;
@@ -83,7 +81,7 @@ BEGIN
 		seg.updown = VCC;
 		min.updown = VCC;
 		hour.updown = VCC;
-		seg.clock = rising_edge(system_clock, divider.clock_out); 
+		seg.clock = divider.clock_out ; 
 		min.clock = seg.EOC;
 		hour.clock = min.EOC;
 		

@@ -7,11 +7,11 @@ SUBDESIGN mode_controller
   view_sw[2..0]  : INPUT; 
   ajuste_sw      : INPUT; 
   alarm_sw[1..0] : INPUT;
-  alarm_comparador[1..0] : INPUT;
+  alarme_comparador : INPUT;
   system_clock   : INPUT;
   
   sel[1..0]      : OUTPUT;
-  leds[1..0]     : OUTPUT;
+  leds           : OUTPUT;
   ajuste[3..0]   : OUTPUT; 
   
 )
@@ -63,45 +63,19 @@ BEGIN
 	
 	piscar.clock_in = system_clock; % controle dos alarmes %
 	
-	IF ajuste_sw == GND THEN
-	
-		IF alarm_sw[] == B"00" THEN
-			leds[] = GND;
-			
-		ELSIF alarm_sw[] == B"01" THEN
-			
-			IF alarm_comparador[] == B"01" THEN
-				leds[0] = piscar.clock_out;
-			ELSIF alarm_comparador[] == B"11"  THEN
-				leds[0]= piscar.clock_out;
-			
-			END IF;
-			
-		ELSIF alarm_sw[] == B"10" THEN
-				
-			IF alarm_comparador[] == B"10" THEN
-				leds[1] = piscar.clock_out;
-			ELSIF alarm_comparador[] == B"11" THEN
-				leds[1]= piscar.clock_out;
-			
-			END IF;
+	IF alarm_sw[] == B"00" THEN
+		leds = GND;
 		
-		ELSE
-		
-			IF alarm_comparador[] == B"11"  THEN
-				leds[]= piscar.clock_out;
-				
-			ELSIF alarm_comparador[] == B"01" THEN
-				leds[0] = piscar.clock_out;
+	ELSE
+		IF alarme_comparador == VCC THEN
+			leds= piscar.clock_out;
 			
-			ELSIF alarm_comparador[] == B"10" THEN
-				leds[1] = piscar.clock_out;
-				
-			END IF;	
-			
+		ELSE 
+			leds = GND;
 		END IF;
-	
+		
 	END IF;
+	
 
 
 

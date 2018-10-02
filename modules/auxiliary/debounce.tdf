@@ -1,0 +1,40 @@
+TITLE "Debounce";
+
+
+SUBDESIGN debounce
+(
+	clock_in : INPUT;
+	button   : INPUT;
+	debounced_button : OUTPUT;
+	
+)
+
+VARIABLE
+	count[19..0]: DFF;
+	aux  : TFF;
+	aux2 : DFF;
+	
+
+BEGIN
+
+	count[].clk = clock_in;
+	aux.clk = clock_in;
+
+	aux2.d = button;
+	aux2.clk = aux.q;
+	debounced_button = aux2.q;
+	
+	IF count[].q < 524287 THEN
+	
+		count[].d = count[].q + 1;
+		aux.t = GND;
+	
+	ELSIF count[].q == 524287 THEN 
+	
+		count[].d = 0;
+		aux.t = VCC;
+		
+	END IF;
+		
+
+END;

@@ -1,0 +1,22 @@
+TITLE "Comparador";
+
+SUBDESIGN comparador
+(
+	horary[11..0] : INPUT;	% hora [11..6], minuto [5..0] %
+	alarm1[11..0] : INPUT;
+	alarm2[11..0] : INPUT;
+	
+	alarme :OUTPUT;
+)
+BEGIN
+	IF horary[11..6] == alarm1[11..6] & horary[5..0] == alarm1[5..0] THEN
+		alarme = B"1";
+		
+	ELSIF horary[11..6] == alarm2[11..6] & horary[5..0] == alarm2[5..0] THEN
+		alarme = B"1";
+	
+	ELSE 
+		alarme = B"0";
+	END IF;
+	
+END;

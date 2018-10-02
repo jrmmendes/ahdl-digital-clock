@@ -6,17 +6,20 @@ SUBDESIGN comparador
 	alarm1[11..0] : INPUT;
 	alarm2[11..0] : INPUT;
 	
-	alarme :OUTPUT;
+	alarme[1..0] :OUTPUT;
 )
 BEGIN
-	IF horary[11..6] == alarm1[11..6] & horary[5..0] == alarm1[5..0] THEN
-		alarme = B"1";
+	IF (horary[11..6] == alarm1[11..6] & horary[5..0] == alarm1[5..0]) & (horary[11..6] == alarm2[11..6] & horary[5..0] == alarm2[5..0]) THEN
+		alarme[] = B"11";
+	
+	ELSIF horary[11..6] == alarm1[11..6] & horary[5..0] == alarm1[5..0] THEN
+		alarme[] = B"01";
 		
 	ELSIF horary[11..6] == alarm2[11..6] & horary[5..0] == alarm2[5..0] THEN
-		alarme = B"1";
-	
+		alarme[] = B"10";
+		
 	ELSE 
-		alarme = B"0";
+		alarme[] = GND;
 	END IF;
 	
 END;
